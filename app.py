@@ -8,7 +8,7 @@ redis = Redis(host= "localhost", port=6379)
 @app.route('/')
 def hello():
     redis.incr('hits')
-    return 'This page has been seen {0} times' . format (redis.get( 'hits' ))
+    return 'Hello Docker learner! You have seen this page {0} times' . format (redis.get( 'hits' ))
 
 if __name__ == "__main__":
     app.run(host= "0.0.0.0", debug=True)
