@@ -1,0 +1,30 @@
+- hosts: docker_hosts
+  sudo: yes
+
+  tasks:
+
+    - name: run page-hit-counter-redis
+      docker:
+        docker_api_version: "1.17"
+        image: redis:3.0.5
+        state: present
+        pull: "always"
+        registry: "<< your registry here >>"
+        username: "<< your username here >>"
+        email: "<< your email here >>"
+        password: "<< your password here >>"
+        name: page-hit-counter-redis
+
+    - name: run page-hit-counter-app
+      docker:
+        docker_api_version: "1.17"
+        image: "<< your registry here >>/page-hit-counter"
+        ports:
+        - "80:5000"
+        state: reloaded
+        pull: "always"
+        registry: "<< your registry here >>"
+        username: "<< your username here >>"
+        email: "<< your email here >>"
+        password: "<< your password here >>"
+        name: page-hit-counter-app
