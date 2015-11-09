@@ -1,0 +1,9 @@
+redis:
+    image: redis:3.0.5
+
+app:
+    image: page-hit-counter
+    links:
+    - "redis:redis"
+    ports:
+    - "127.0.0.1:80:5000"
