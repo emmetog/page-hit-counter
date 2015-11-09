@@ -3,11 +3,21 @@
 
   tasks:
 
+    - name: Install pip
+      apt:
+        name: python-pip
+        state: present
+
+    - name: Install docker-py
+      pip:
+        name: docker-py
+        version: 1.5.0
+
     - name: run page-hit-counter-redis
       docker:
-        docker_api_version: "1.17"
+        docker_api_version: "1.18"
         image: redis:3.0.5
-        state: present
+        state: started
         pull: "always"
         registry: "<< your registry here >>"
         username: "<< your username here >>"
@@ -17,7 +27,7 @@
 
     - name: run page-hit-counter-app
       docker:
-        docker_api_version: "1.17"
+        docker_api_version: "1.18"
         image: "<< your registry here >>/page-hit-counter"
         ports:
         - "80:5000"
