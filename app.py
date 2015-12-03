@@ -10,4 +10,4 @@ def hello():
     return 'Hello Docker learner! You have seen this page {0} times' . format (redis.get( 'hits' ))
 
 if __name__ == "__main__":
-    app.run(host= "0.0.0.0", debug=True)
+    app.run(host= "0.0.0.0", debug=False)
