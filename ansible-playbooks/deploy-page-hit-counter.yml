@@ -3,6 +3,7 @@
 
   tasks:
 
+      # This playbook will only work on Ubuntu servers because it uses "apt"
     - name: Update apt cache
       apt:
         update_cache: yes
@@ -13,10 +14,8 @@
         name: python-pip
         state: present
 
-    - name: Install docker-py
-      pip:
-        name: docker-py
-        version: 1.5.0
+      # Install docker
+    - include: install-docker.yml
 
     - name: run page-hit-counter-redis
       docker:
@@ -32,6 +31,8 @@
         image: "<< your registry here >>/page-hit-counter"
         ports:
         - "80:5000"
+        links:
+        - "page-hit-counter-redis:redis"
         state: reloaded
         pull: "always"
         registry: "<< your registry here >>"
